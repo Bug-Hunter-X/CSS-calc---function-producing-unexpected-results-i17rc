@@ -1,0 +1,16 @@
+To avoid issues with `calc()`, always ensure that the calculation produces a non-negative value and maintain consistent units throughout.  Using absolute units (e.g., `px`) can simplify things and prevent unit conflict. For example, if you need a width relative to another element, use percentages instead of calculating an absolute pixel width which might not work across various screen sizes.  
+
+```css
+/*bug.css (Incorrect usage)*/
+.element {
+  width: calc(100% - 200px);
+  height: calc(50px - 100%); /*Inconsistent units*/
+}
+
+/*bugSolution.css (Corrected usage)*/
+.element {
+  width: calc(100% - 200px); /* Might still be negative depending on parent width */
+  height: 50px; /* Or use percentage if appropriate */
+  min-width: 0; /* Prevents negative width */
+}
+```
